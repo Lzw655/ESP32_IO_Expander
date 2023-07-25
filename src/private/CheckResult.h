@@ -1,0 +1,69 @@
+#ifndef CHECKRESULT_H
+#define CHECKRESULT_H
+
+#include <assert.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+#include "esp_check.h"
+#include "esp_log.h"
+#include "esp_timer.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define ERROR_CHECK_LOG_FORMAT(format)      "[%s:%u] %s(): " format, path_to_file_name(__FILE__), __LINE__, __FUNCTION__
+#define ERROR_CHECK_LOGE(tag, format, ...)  ESP_LOGE(tag, ERROR_CHECK_LOG_FORMAT(format), ##__VA_ARGS__)
+
+#define CHECK_ERROR_RETURN(x)  do {         \
+        esp_err_t err_rc_ = (x);            \
+        if (unlikely(err_rc_ != ESP_OK)) {  \
+            ERROR_CHECK_LOGE(TAG, "Check error %d (%s)", err_rc_, esp_err_to_name(err_rc_)); \
+            return;                         \
+        }                                   \
+    } while(0)
+
+#define CHECK_ERROR_GOTO(x, goto_tag) do {  \
+        esp_err_t err_rc_ = (x);            \
+        if (unlikely(err_rc_ != ESP_OK)) {  \
+            ERROR_CHECK_LOGE(TAG, "Check error %d (%s)", err_rc_, esp_err_to_name(err_rc_)); \
+            goto goto_tag;                  \
+        }                                   \
+    } while(0)
+
+#define CHECK_NULL_RETURN(x) do {           \
+        if ((x) == NULL) {                  \
+            ERROR_CHECK_LOGE(TAG, "Check NULL"); \
+            return;                         \
+        }                                   \
+    } while(0)
+
+#define CHECK_NULL_GOTO(x, goto_tag) do {   \
+        if ((x) == NULL) {                  \
+            ERROR_CHECK_LOGE(TAG, "Check NULL"); \
+            goto goto_tag;                  \
+        }                                   \
+    } while(0)
+
+#define CHECK_FALSE_RETURN(x)  do {         \
+        if (unlikely((x) == false)) {       \
+            ERROR_CHECK_LOGE(TAG, "Check false"); \
+            return;                         \
+        }                                   \
+    } while(0)
+
+#define CHECK_FALSE_GOTO(x, goto_tag) do {  \
+        if (unlikely((x) == false)) {       \
+            ERROR_CHECK_LOGE(TAG, "Check false"); \
+            goto goto_tag;                  \
+        }                                   \
+    } while(0)
+
+const char *path_to_file_name(const char * path);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
