@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include "driver/i2c.h"
 
 #include "private/CheckResult.h"
@@ -24,37 +30,32 @@
         },                                                      \
     }
 
-static char *TAG = "ESP_IOExpander";
+static const char *TAG = "ESP_IOExpander";
 
 ESP_IOExpander::ESP_IOExpander(i2c_port_t id, uint8_t address, const i2c_config_t *config):
+    handle(NULL),
     i2c_id(id),
     i2c_config(*config),
     i2c_address(address),
-    i2c_need_init(true),
-    handle((esp_io_expander_handle_t)NULL)
+    i2c_need_init(true)
 {
 }
 
 ESP_IOExpander::ESP_IOExpander(i2c_port_t id, uint8_t address, int scl, int sda):
+    handle(NULL),
     i2c_id(id),
     i2c_config((i2c_config_t)I2C_HOST_CONFIG_DEFAULT(scl, sda)),
     i2c_address(address),
-    i2c_need_init(true),
-    handle((esp_io_expander_handle_t)NULL)
+    i2c_need_init(true)
 {
 }
 
 ESP_IOExpander::ESP_IOExpander(i2c_port_t id, uint8_t address):
+    handle(NULL),
     i2c_id(id),
     i2c_address(address),
-    i2c_need_init(false),
-    handle((esp_io_expander_handle_t)NULL)
+    i2c_need_init(false)
 {
-}
-
-ESP_IOExpander::~ESP_IOExpander()
-{
-    del();
 }
 
 void ESP_IOExpander::init(void)
@@ -116,7 +117,7 @@ void ESP_IOExpander::multiDigitalWrite(uint32_t pin_mask, uint8_t value)
     CHECK_ERROR_RETURN(esp_io_expander_set_level(handle, pin_mask, value));
 }
 
-uint32_t ESP_IOExpander::multiDigitalMultipleRead(uint32_t pin_mask)
+uint32_t ESP_IOExpander::multiDigitalRead(uint32_t pin_mask)
 {
     uint32_t level;
     CHECK_ERROR_GOTO(esp_io_expander_get_level(handle, pin_mask, &level), err);

@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #ifndef CHECKRESULT_H
 #define CHECKRESULT_H
 
@@ -7,7 +13,6 @@
 
 #include "esp_check.h"
 #include "esp_log.h"
-#include "esp_timer.h"
 
 #ifdef __cplusplus
 extern "C" {

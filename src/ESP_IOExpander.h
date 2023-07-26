@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #ifndef ESP_IOEXPANDER_H
 #define ESP_IOEXPANDER_H
 
@@ -13,7 +19,6 @@ public:
     ESP_IOExpander(i2c_port_t id, uint8_t address, const i2c_config_t *config);
     ESP_IOExpander(i2c_port_t id, uint8_t address, int scl, int sda);
     ESP_IOExpander(i2c_port_t id, uint8_t address);
-    ~ESP_IOExpander();
 
     void init(void);
     void reset(void);
@@ -25,10 +30,11 @@ public:
 
     void multiPinMode(uint32_t pin_mask, uint8_t mode);
     void multiDigitalWrite(uint32_t pin_mask, uint8_t value);
-    uint32_t multiDigitalMultipleRead(uint32_t pin_mask);
+    uint32_t multiDigitalRead(uint32_t pin_mask);
 
     void printStatus(void);
 
+    virtual ~ESP_IOExpander() = default;
     virtual void begin(void) = 0;
 
 protected:
@@ -39,6 +45,7 @@ protected:
     i2c_config_t i2c_config;
     uint8_t i2c_address;
     bool i2c_need_init;
+
 };
 
 #endif

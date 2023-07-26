@@ -1,16 +1,24 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #pragma once
 
 #include <stdint.h>
 
+#include "driver/i2c.h"
 #include "esp_err.h"
 
 #include "../ESP_IOExpander.h"
 
-class ESP_IOExpander_TCA9554: public ESP_IOExpander {
+class ESP_IOExpander_TCA95xx_8bit: public ESP_IOExpander {
 public:
-    ESP_IOExpander_TCA9554(i2c_port_t id, uint8_t address, const i2c_config_t *config): ESP_IOExpander(id, address, config) { };
-    ESP_IOExpander_TCA9554(i2c_port_t id, uint8_t address, int scl, int sda): ESP_IOExpander(id, address, scl, sda) { };
-    ESP_IOExpander_TCA9554(i2c_port_t id, uint8_t address): ESP_IOExpander(id, address) { };
+    ESP_IOExpander_TCA95xx_8bit(i2c_port_t id, uint8_t address, const i2c_config_t *config): ESP_IOExpander(id, address, config) { };
+    ESP_IOExpander_TCA95xx_8bit(i2c_port_t id, uint8_t address, int scl, int sda): ESP_IOExpander(id, address, scl, sda) { };
+    ESP_IOExpander_TCA95xx_8bit(i2c_port_t id, uint8_t address): ESP_IOExpander(id, address) { };
+    ~ESP_IOExpander_TCA95xx_8bit() override;
 
     void begin(void) override;
 };
