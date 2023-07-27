@@ -13,6 +13,12 @@
 
 #include "base/esp_io_expander.h"
 
+// Refer to `esp32-hal-gpio.h`
+#define INPUT             0x01
+#define OUTPUT            0x03
+#define LOW               0x0
+#define HIGH              0x1
+
 class ESP_IOExpander
 {
 public:
@@ -23,6 +29,7 @@ public:
     void init(void);
     void reset(void);
     void del(void);
+    esp_io_expander_handle_t getHandle(void);
 
     void pinMode(uint8_t pin, uint8_t mode);
     void digitalWrite(uint8_t pin, uint8_t val);
