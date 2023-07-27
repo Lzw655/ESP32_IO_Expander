@@ -15,11 +15,53 @@
 
 class ESP_IOExpander_TCA95xx_16bit: public ESP_IOExpander {
 public:
+    /**
+     * @brief Constructor to create ESP_IOExpander object
+     *
+     * @note  After using this function, call `init()` will initialize I2C bus.
+     *
+     * @param id I2C port number
+     * @param address I2C device address. Should be like `ESP_IO_EXPANDER_I2C_*`.
+     *                Can be found in the header file of each IO expander.h.
+     * @param config Pointer to I2C bus configuration
+     */
     ESP_IOExpander_TCA95xx_16bit(i2c_port_t id, uint8_t address, const i2c_config_t *config): ESP_IOExpander(id, address, config) { };
+
+    /**
+     * @brief Constructor to create ESP_IOExpander object
+     *
+     * @note  After using this function, call `init()` will initialize I2C bus.
+     *
+     * @param id I2C port number
+     * @param address I2C device address. Should be like `ESP_IO_EXPANDER_I2C_*`.
+     *                Can be found in the header file of each IO expander.h.
+     * @param scl SCL pin number
+     * @param sda SDA pin number
+     */
     ESP_IOExpander_TCA95xx_16bit(i2c_port_t id, uint8_t address, int scl, int sda): ESP_IOExpander(id, address, scl, sda) { };
+
+    /**
+     * @brief Constructor to create ESP_IOExpander object
+     *
+     * @note  If use this function, should initialize I2C bus before call `init()`.
+     *
+     * @param id I2C port number
+     * @param address I2C device address. Should be like `ESP_IO_EXPANDER_I2C_*`.
+     *                Can be found in the header file of each IO expander.h.
+     */
     ESP_IOExpander_TCA95xx_16bit(i2c_port_t id, uint8_t address): ESP_IOExpander(id, address) { };
+
+    /**
+     * @brief Destructor
+     *
+     * @note  This function will delete I2C driver if it is initialized by ESP_IOExpander and delete ESP_IOExpander object.
+     */
     ~ESP_IOExpander_TCA95xx_16bit() override;
 
+    /**
+     * @brief Begin IO expander
+     *
+     */
     void begin(void) override;
 };
 
