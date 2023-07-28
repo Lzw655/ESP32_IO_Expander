@@ -9,7 +9,7 @@
 * Support to control individual IO in the same way as Arduino
 * Support to control multiple IOs at the same time.
 
-## v1.0.1 -
+## v1.0.1 - 2023-07-28
 
 ### Fixed:
 

@@ -35,8 +35,7 @@
  * @brief ESP_IOExpander class.
  *
  */
-class ESP_IOExpander
-{
+class ESP_IOExpander {
 public:
     /**
      * @brief Constructor to create ESP_IOExpander object
