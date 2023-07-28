@@ -38,23 +38,25 @@ TEST_CASE("test ESP IO expander for TCA9554", "[tca9554]")
     TEST_ASSERT_EQUAL(i2c_driver_install(I2C_HOST, i2c_config.mode, 0, 0, 0), ESP_OK);
     expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000);
     expander->init();
-    expander->reset();
     expander->begin();
+    expander->reset();
     expander->del();
+    delete expander;
+    i2c_driver_delete(I2C_HOST);
 
     ESP_LOGI(TAG, "Test initialization with internal I2C (with config)");
     expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, &i2c_config);
     expander->init();
-    expander->reset();
     expander->begin();
+    expander->reset();
     expander->del();
+    delete expander;
 
     ESP_LOGI(TAG, "Test initialization with internal I2C (without config)");
     expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, I2C_SCL_PIN, I2C_SDA_PIN);
     expander->init();
-    expander->reset();
     expander->begin();
-    expander->del();
+    expander->reset();
 
     ESP_LOGI(TAG, "Test input/output functions");
     ESP_LOGI(TAG, "Original status:");

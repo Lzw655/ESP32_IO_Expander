@@ -53,7 +53,9 @@ ESP_IOExpander_TCA95xx_8bit::~ESP_IOExpander_TCA95xx_8bit()
     if (i2c_need_init) {
         i2c_driver_delete(i2c_id);
     }
-    del();
+    if (handle) {
+        del();
+    }
 }
 
 void ESP_IOExpander_TCA95xx_8bit::begin(void)

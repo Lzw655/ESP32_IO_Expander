@@ -51,7 +51,9 @@ ESP_IOExpander_TCA95xx_16bit::~ESP_IOExpander_TCA95xx_16bit()
     if (i2c_need_init) {
         i2c_driver_delete(i2c_id);
     }
-    del();
+    if (handle) {
+        del();
+    }
 }
 
 static esp_err_t esp_io_expander_new_i2c_tca95xx_16bit(i2c_port_t i2c_num, uint32_t i2c_address, esp_io_expander_handle_t *handle);

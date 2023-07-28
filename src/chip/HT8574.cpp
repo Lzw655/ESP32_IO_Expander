@@ -48,7 +48,9 @@ ESP_IOExpander_HT8574::~ESP_IOExpander_HT8574()
     if (i2c_need_init) {
         i2c_driver_delete(i2c_id);
     }
-    del();
+    if (handle) {
+        del();
+    }
 }
 
 void ESP_IOExpander_HT8574::begin(void)
