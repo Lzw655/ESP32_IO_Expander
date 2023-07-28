@@ -14,3 +14,10 @@
 ### Fixed:
 
 * Modify title of output log in test_apps
+* Add comments for APIs
+
+### Enhancements:
+
+* Add `getHandle()` API
+* Update CI for building `test_apps`
+* Update CI for `pre-commit`

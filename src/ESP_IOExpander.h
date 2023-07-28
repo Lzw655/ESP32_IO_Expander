@@ -19,6 +19,18 @@
 #define LOW               0x0
 #define HIGH              0x1
 
+#define EXPANDER_I2C_CONFIG_DEFAULT(scl, sda)                   \
+    {                                                           \
+        .mode = I2C_MODE_MASTER,                                \
+        .sda_io_num = sda,                                      \
+        .scl_io_num = scl,                                      \
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,                    \
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,                    \
+        .master = {                                             \
+            .clk_speed = 400000,                                \
+        },                                                      \
+    }
+
 /**
  * @brief ESP_IOExpander class.
  *
