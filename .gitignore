@@ -56,6 +56,7 @@ build_esp*/
 build_linux*/
 size_info.txt
 sdkconfig
+sdkconfig.old
 
 # lock files for examples and components
 dependencies.lock
