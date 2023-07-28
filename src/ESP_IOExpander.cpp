@@ -9,26 +9,8 @@
 #include "private/CheckResult.h"
 #include "ESP_IOExpander.h"
 
-// Refer to `esp32-hal-gpio.h`
-#define INPUT             0x01
-#define OUTPUT            0x03
-#define LOW               0x0
-#define HIGH              0x1
-
 // Check whether it is a valid pin number
 #define IS_VALID_PIN(pin_num)   (pin_num < IO_COUNT_MAX)
-
-#define I2C_HOST_CONFIG_DEFAULT(scl, sda)                       \
-    {                                                           \
-        .mode = I2C_MODE_MASTER,                                \
-        .sda_io_num = sda,                                      \
-        .scl_io_num = scl,                                      \
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,                    \
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,                    \
-        .master = {                                             \
-            .clk_speed = 400000,                                \
-        },                                                      \
-    }
 
 static const char *TAG = "ESP_IOExpander";
 
@@ -44,7 +26,7 @@ ESP_IOExpander::ESP_IOExpander(i2c_port_t id, uint8_t address, const i2c_config_
 ESP_IOExpander::ESP_IOExpander(i2c_port_t id, uint8_t address, int scl, int sda):
     handle(NULL),
     i2c_id(id),
-    i2c_config((i2c_config_t)I2C_HOST_CONFIG_DEFAULT(scl, sda)),
+    i2c_config((i2c_config_t)EXPANDER_I2C_CONFIG_DEFAULT(scl, sda)),
     i2c_address(address),
     i2c_need_init(true)
 {
@@ -77,6 +59,13 @@ void ESP_IOExpander::del(void)
     handle = NULL;
 }
 
+esp_io_expander_handle_t ESP_IOExpander::getHandle(void)
+{
+    CHECK_NULL_GOTO(handle, err);
+err:
+    return handle;
+}
+
 void ESP_IOExpander::pinMode(uint8_t pin, uint8_t mode)
 {
     CHECK_FALSE_RETURN(IS_VALID_PIN(pin));
@@ -94,14 +83,12 @@ void ESP_IOExpander::digitalWrite(uint8_t pin, uint8_t val)
 
 int ESP_IOExpander::digitalRead(uint8_t pin)
 {
+    uint32_t level = 0;
     CHECK_FALSE_GOTO(IS_VALID_PIN(pin), err);
 
-    uint32_t level;
     CHECK_ERROR_GOTO(esp_io_expander_get_level(handle, BIT64(pin), &level), err);
-    return (level & BIT64(pin)) ? HIGH : LOW;
-
 err:
-    return 0;
+    return (level & BIT64(pin)) ? HIGH : LOW;
 }
 
 void ESP_IOExpander::multiPinMode(uint32_t pin_mask, uint8_t mode)
@@ -119,12 +106,10 @@ void ESP_IOExpander::multiDigitalWrite(uint32_t pin_mask, uint8_t value)
 
 uint32_t ESP_IOExpander::multiDigitalRead(uint32_t pin_mask)
 {
-    uint32_t level;
+    uint32_t level = 0;
     CHECK_ERROR_GOTO(esp_io_expander_get_level(handle, pin_mask, &level), err);
-    return level;
-
 err:
-    return 0;
+    return level;
 }
 
 void ESP_IOExpander::printStatus(void)

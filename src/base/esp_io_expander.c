@@ -9,6 +9,9 @@
 
 #include "esp_bit_defs.h"
 #include "esp_check.h"
+#ifdef LOG_LOCAL_LEVEL
+#undef LOG_LOCAL_LEVEL
+#endif
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 

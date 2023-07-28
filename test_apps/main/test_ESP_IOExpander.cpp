@@ -24,16 +24,39 @@
 
 static const char *TAG = "ESP_IOxpander_test";
 
+#define I2C_HOST        (I2C_NUM_0)
 #define I2C_SDA_PIN     (8)
 #define I2C_SCL_PIN     (18)
 
 TEST_CASE("test ESP IO expander for TCA9554", "[tca9554]")
 {
-    ESP_IOExpander *expander = new ESP_IOExpander_TCA95xx_8bit(I2C_NUM_0, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, I2C_SCL_PIN, I2C_SDA_PIN);
+    ESP_IOExpander *expander = NULL;
+    const i2c_config_t i2c_config = EXPANDER_I2C_CONFIG_DEFAULT(I2C_SCL_PIN, I2C_SDA_PIN);
 
+    ESP_LOGI(TAG, "Test initialization with external I2C");
+    TEST_ASSERT_EQUAL(i2c_param_config(I2C_HOST, &i2c_config), ESP_OK);
+    TEST_ASSERT_EQUAL(i2c_driver_install(I2C_HOST, i2c_config.mode, 0, 0, 0), ESP_OK);
+    expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000);
     expander->init();
+    expander->reset();
     expander->begin();
+    expander->del();
 
+    ESP_LOGI(TAG, "Test initialization with internal I2C (with config)");
+    expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, &i2c_config);
+    expander->init();
+    expander->reset();
+    expander->begin();
+    expander->del();
+
+    ESP_LOGI(TAG, "Test initialization with internal I2C (without config)");
+    expander = new ESP_IOExpander_TCA95xx_8bit(I2C_HOST, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000, I2C_SCL_PIN, I2C_SDA_PIN);
+    expander->init();
+    expander->reset();
+    expander->begin();
+    expander->del();
+
+    ESP_LOGI(TAG, "Test input/output functions");
     ESP_LOGI(TAG, "Original status:");
     expander->printStatus();
 

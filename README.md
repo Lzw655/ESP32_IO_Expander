@@ -40,9 +40,10 @@ uint32_t level = expander->multiDigitalRead(IO_EXPANDER_PIN_NUM_2 | IO_EXPANDER_
 
 The following tables show the supported SDK versions for ESP32_IO_Expander at different versions.
 
-| **ESP32_IO_Expander** | **Arduino-ESP32** | **ESP-IDF** |
-| :-------------------: | :---------------: | :---------: |
-|        v1.0.0         | v2.0.9 and later  |   v4.4.5    |
+| **ESP32_IO_Expander** | **Arduino-ESP32** |   **ESP-IDF**    |
+| :-------------------: | :---------------: | :--------------: |
+|        v1.0.0         | v2.0.9 and later  |      v4.4.5      |
+|        v1.0.1         | v2.0.9 and later  | v4.4.5 and later |
 
 ## Supported Drivers
 

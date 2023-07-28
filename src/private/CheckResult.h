@@ -65,7 +65,7 @@ extern "C" {
         }                                   \
     } while(0)
 
-const char *path_to_file_name(const char * path);
+const char *path_to_file_name(const char *path);
 
 #ifdef __cplusplus
 }

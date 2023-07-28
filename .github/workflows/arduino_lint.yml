@@ -1,6 +1,9 @@
-name: arduino/arduino-lint-action
-run-name: ${{ github.actor }} is running Arduino Action
-on: [push, pull_request]
+name: Arduino Lint Action
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
 jobs:
   lint:
     runs-on: ubuntu-latest
