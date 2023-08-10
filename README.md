@@ -42,8 +42,9 @@ The following tables show the supported SDK versions for ESP32_IO_Expander at di
 
 | **ESP32_IO_Expander** | **Arduino-ESP32** |   **ESP-IDF**    |
 | :-------------------: | :---------------: | :--------------: |
-|        v1.0.0         | v2.0.9 and later  |      v4.4.5      |
+|        v1.0.0         | v2.0.9 and later  | v4.4.5 and later |
 |        v1.0.1         | v2.0.9 and later  | v4.4.5 and later |
+|        v1.0.2         | v2.0.9 and later  | v4.4.5 and later |
 
 ## Supported Drivers
 

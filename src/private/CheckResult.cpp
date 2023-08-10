@@ -6,6 +6,8 @@
 
 #include <stddef.h>
 
+namespace esp_io_expander {
+
 const char *path_to_file_name(const char *path)
 {
     size_t i = 0;
@@ -19,4 +21,6 @@ const char *path_to_file_name(const char *path)
         p++;
     }
     return path + pos;
+}
+
 }

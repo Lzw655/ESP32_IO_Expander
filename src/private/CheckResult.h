@@ -14,11 +14,7 @@
 #include "esp_check.h"
 #include "esp_log.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define ERROR_CHECK_LOG_FORMAT(format)      "[%s:%u] %s(): " format, path_to_file_name(__FILE__), __LINE__, __FUNCTION__
+#define ERROR_CHECK_LOG_FORMAT(format)      "[%s:%u] %s(): " format, esp_io_expander::path_to_file_name(__FILE__), __LINE__, __FUNCTION__
 #define ERROR_CHECK_LOGE(tag, format, ...)  ESP_LOGE(tag, ERROR_CHECK_LOG_FORMAT(format), ##__VA_ARGS__)
 
 #define CHECK_ERROR_RETURN(x)  do {         \
@@ -65,10 +61,8 @@ extern "C" {
         }                                   \
     } while(0)
 
+namespace esp_io_expander {
 const char *path_to_file_name(const char *path);
-
-#ifdef __cplusplus
 }
-#endif
 
 #endif

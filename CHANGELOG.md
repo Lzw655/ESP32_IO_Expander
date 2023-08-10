@@ -21,3 +21,13 @@
 * Add `getHandle()` API
 * Update CI for building `test_apps`
 * Update CI for `pre-commit`
+
+## v1.0.2 - 2023-08-10
+
+### Fixed:
+
+* Use namespace for `CheckResult`
+
+### Enhancements:
+
+* Upload into Espressif Registry

@@ -1,0 +1,5 @@
+version: "1.0.2"
+description: ESP32 IO Expander Driver which encapsulates various components using C++
+url: https://github.com/Lzw655/ESP32_IOExpander
+dependencies:
+  idf: ">=4.4.5"
