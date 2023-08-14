@@ -30,6 +30,9 @@ expander->multiDigitalWrite(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, HIGH)
 expander->multiDigitalWrite(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, LOW);
 expander->multiPinMode(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, INPUT);
 uint32_t level = expander->multiDigitalRead(IO_EXPANDER_PIN_NUM_2 | IO_EXPANDER_PIN_NUM_3);
+
+// Release the ESP_IOExpander object
+delete expander;
 ```
 
 ## Arduino Example
@@ -40,17 +43,15 @@ uint32_t level = expander->multiDigitalRead(IO_EXPANDER_PIN_NUM_2 | IO_EXPANDER_
 
 The following tables show the supported SDK versions for ESP32_IO_Expander at different versions.
 
-| **ESP32_IO_Expander** | **Arduino-ESP32** |   **ESP-IDF**    |
-| :-------------------: | :---------------: | :--------------: |
-|        v1.0.0         | v2.0.9 and later  | v4.4.5 and later |
-|        v1.0.1         | v2.0.9 and later  | v4.4.5 and later |
-|        v1.0.2         | v2.0.9 and later  | v4.4.5 and later |
+| **ESP32_IO_Expander** | **Arduino-ESP32** | **ESP-IDF** |
+| :-------------------: | :---------------: | :---------: |
+|        v1.x.x         |     >= v2.0.9     |  >= v4.4.5  |
 
 ## Supported Drivers
 
 |   **Driver**    |                                         **Version**                                          |
 | --------------- | -------------------------------------------------------------------------------------------- |
-| Base Component  | [1.0.1](https://components.espressif.com/components/espressif/esp_io_expander)               |
+| esp_io_expander | [1.0.1](https://components.espressif.com/components/espressif/esp_io_expander)               |
 | TCA95xx (8bit)  | [1.0.1](https://components.espressif.com/components/espressif/esp_io_expander_tca9554)       |
 | TCA95xx (16bit) | [1.0.0](https://components.espressif.com/components/espressif/esp_io_expander_tca95xx_16bit) |
 | HT8574          | [1.0.0](https://components.espressif.com/components/espressif/esp_io_expander_ht8574)        |

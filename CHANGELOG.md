@@ -31,3 +31,9 @@
 ### Enhancements:
 
 * Upload into Espressif Registry
+
+## v1.1.0 - 2023-08-14
+
+### Fixed:
+
+* Change library name to `ESP32_IO_Expander`
