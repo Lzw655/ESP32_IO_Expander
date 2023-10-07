@@ -1,5 +1,9 @@
 # ESP32_IO_Expander
 
+## !!!Notice!!!
+
+**This library has been archived. Please use the [official Espressif library](https://github.com/esp-arduino-libs/ESP32_IO_Expander) instead.**
+
 ESP32_IO_Expander is a versatile library designed to drive IO expander chips with ESP32. It is based on [Arduino-ESP32](https://github.com/espressif/arduino-esp32) (or [ESP-IDF](https://github.com/espressif/esp-idf)) and utilizes [Espressif Components Registry](https://components.espressif.com/), with various components encapsulated using C++.
 
 ## Features
